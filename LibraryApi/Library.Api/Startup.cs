@@ -36,6 +36,7 @@ namespace Library.Api
 
             //Inyección de Dependencias
             services.AddTransient<IBooksRepository, BookRepository>();
+            services.AddTransient<IAuthorsRepository, AuthorRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

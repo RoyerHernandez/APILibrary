@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Interfaces\IAuthorsRepository.cs~RF5591df5.TMP" />
+    <None Remove="Interfaces\IAuthorsRepository.cs~RF5646921.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Enumerables\" />
     <Folder Include="DTOs\" />
     <Folder Include="Exceptions\" />
