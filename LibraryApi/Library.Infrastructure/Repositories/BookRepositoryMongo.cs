@@ -25,5 +25,10 @@ namespace Library.Infrastructure.Repositories
             await Task.Delay(10);
             return (IEnumerable<Books>)book;
         }
+
+        public Task InsertBook(Books book)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -27,6 +27,11 @@ namespace Library.Infrastructure.Repositories
             var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Isbn == id);
             return book;
         }
+        public async Task InsertBook(Books book)
+        {
+            _dbContext.Add(book);
+            await _dbContext.SaveChangesAsync();
+        }
         //public async Task<IEnumerable<Book>> GetBook()
         //{
         //    var book = Enumerable.Range(1, 10).Select(x => new Book

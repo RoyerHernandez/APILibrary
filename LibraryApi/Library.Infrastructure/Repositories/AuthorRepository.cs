@@ -25,5 +25,10 @@ namespace Library.Infrastructure.Repositories
             var author = await _dbContext.Authors.FirstOrDefaultAsync(x => x.Id == id);
             return author;
         }
+        public async Task InsertAuthor(Authors author)
+        {
+            _dbContext.Add(author);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

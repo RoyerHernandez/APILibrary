@@ -1,4 +1,5 @@
-﻿using Library.Core.Interfaces;
+﻿using Library.Core.Entities;
+using Library.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,13 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> GetBook(int id)
         {
             var book = await _booksRepository.GetBook(id);
+            return Ok(book);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertBook(Books book)
+        {
+            await _booksRepository.InsertBook(book);
             return Ok(book);
         }
     }

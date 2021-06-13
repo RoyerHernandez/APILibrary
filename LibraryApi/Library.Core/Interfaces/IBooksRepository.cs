@@ -8,5 +8,6 @@ namespace Library.Core.Interfaces
     {
         public Task<IEnumerable<Books>> GetBooks();
         public Task<Books> GetBook(int id);
+        public Task InsertBook(Books book);
     }
 }

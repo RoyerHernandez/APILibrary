@@ -1,4 +1,5 @@
-﻿using Library.Core.Interfaces;
+﻿using Library.Core.Entities;
+using Library.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -25,6 +26,13 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> GetAuthor(int id)
         {
             var author = await _authorsRepository.GetAuthor(id);
+            return Ok(author);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertAuthor(Authors author)
+        {
+            await _authorsRepository.InsertAuthor(author);
             return Ok(author);
         }
     }
