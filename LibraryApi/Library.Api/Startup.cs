@@ -24,6 +24,12 @@ namespace Library.Api
         {
             services.AddControllers();
 
+            //Referencia Circular
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
             //ConnectionStrings
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Library")));
 

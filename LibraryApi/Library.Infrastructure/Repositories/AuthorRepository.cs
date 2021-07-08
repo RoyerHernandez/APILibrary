@@ -30,5 +30,17 @@ namespace Library.Infrastructure.Repositories
             _dbContext.Add(author);
             await _dbContext.SaveChangesAsync();
         }
+        //public async Task<Authors> GetAuthorForEditorial(int id)      //{
+        //    var editorial = await from a in _dbContext.Authors
+        //                          join ahb in _dbContext.AuthorsHasBooks on a.id equals ahb.authoresId
+        //                          join b in _dbContext.Books on b.ISBN equals ahb.ISBN
+        //                          join e in _dbContext.Editorials on b.editorialId equals e.id
+        //                          where e.id == id
+        //                          select new authorForEditorial
+        //                          {
+        //                              a.firstName
+        //                          };
+        //    return editorial;
+        //}
     }
 }

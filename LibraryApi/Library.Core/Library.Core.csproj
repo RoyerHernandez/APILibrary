@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="Enumerables\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Exceptions\" />
   </ItemGroup>
 

@@ -28,6 +28,6 @@ namespace Library.Infrastructure.Repositories
         {
             _dbContext.Add(editorial);
             await _dbContext.SaveChangesAsync();
-        }
+        }        
     }
 }
