@@ -44,5 +44,24 @@ namespace Library.Infrastructure.Repositories
         //    await Task.Delay(10);
         //    return book;
         //}
+
+        public async Task<bool> updateBook(Books book)
+        {
+            var currentBook = await GetBook(book.Isbn);
+            currentBook.Title = book.Title;
+            currentBook.Sinopsis = book.Sinopsis;
+            currentBook.Pages = book.Pages;
+
+            int rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
+        public async Task<bool> deleteBook(int id)
+        {
+            var currentBook = await GetBook(id);
+            _dbContext.Books.Remove(currentBook);
+
+            int rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
     }
 }

@@ -8,6 +8,11 @@ namespace Library.Infrastructure.Repositories
 {
     public class BookRepositoryMongo : IBooksRepository
     {
+        public Task<bool> deleteBook(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<Books> GetBook(int id)
         {
             throw new System.NotImplementedException();
@@ -27,6 +32,11 @@ namespace Library.Infrastructure.Repositories
         }
 
         public Task InsertBook(Books book)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<bool> updateBook(Books book)
         {
             throw new System.NotImplementedException();
         }
