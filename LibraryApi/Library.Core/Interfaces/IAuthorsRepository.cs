@@ -9,5 +9,7 @@ namespace Library.Core.Interfaces
         public Task<IEnumerable<Authors>> GetAuthors();
         public Task<Authors> GetAuthor(int id);
         public Task InsertAuthor(Authors author);
+        public Task<bool> UpdateAuthor(Authors author);
+        public Task<bool> DeleteAuthor(int Id);
     }
 }

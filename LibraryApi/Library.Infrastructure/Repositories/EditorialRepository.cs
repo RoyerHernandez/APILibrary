@@ -28,6 +28,23 @@ namespace Library.Infrastructure.Repositories
         {
             _dbContext.Add(editorial);
             await _dbContext.SaveChangesAsync();
-        }        
+        }
+        public async Task<bool> UpdateEditorial(Editorials editorial)
+        {
+            var currentEditorial = await GetEditorial(editorial.Id);
+            currentEditorial.EditorialName = editorial.EditorialName;
+            currentEditorial.Books = editorial.Books;
+            currentEditorial.Headquarters = editorial.Headquarters;
+
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
+        public async Task<bool> DeleteEditorial(int id)
+        {
+            var currenEditorial = await GetEditorial(id);
+            _dbContext.Editorials.Remove(currenEditorial);
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
     }
 }

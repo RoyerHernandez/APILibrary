@@ -53,5 +53,18 @@ namespace Library.Api.Controllers
             await _editorialRepository.InsertEditorial(editorial);
             return Ok(editorial);
         }
+        [HttpPut]
+        public async Task<IActionResult> PutEditorial(int id,Editorials editorial)
+        {
+            editorial.Id = id;
+            await _editorialRepository.UpdateEditorial(editorial);
+            return Ok(editorial);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteEditorial(int id)
+        {
+            var result = await _editorialRepository.DeleteEditorial(id);
+            return Ok(result);
+        }
     }
 }

@@ -42,5 +42,23 @@ namespace Library.Infrastructure.Repositories
         //                          };
         //    return editorial;
         //}
+        public async Task <bool>UpdateAuthor(Authors author) 
+        {
+            var currentAuthor = await GetAuthor(author.Id);
+            currentAuthor.FirstName = author.FirstName;
+            currentAuthor.LastName = author.LastName;
+
+            int rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
+
+        public async Task<bool> DeleteAuthor(int id)
+        {
+            var currentAuthor = await GetAuthor(id);
+            _dbContext.Authors.Remove(currentAuthor);
+
+            int rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
     }
 }

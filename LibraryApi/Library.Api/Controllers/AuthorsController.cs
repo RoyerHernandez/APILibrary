@@ -35,5 +35,20 @@ namespace Library.Api.Controllers
             await _authorsRepository.InsertAuthor(author);
             return Ok(author);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> putAuthor(int id, Authors author)
+        {
+            author.Id = id;
+            await _authorsRepository.UpdateAuthor(author);
+            return Ok(author);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAuthor(int id)
+        {
+            var result = await _authorsRepository.DeleteAuthor(id);
+            return Ok(result);
+        }
     }
 }
