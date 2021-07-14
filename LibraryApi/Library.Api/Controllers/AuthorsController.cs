@@ -1,4 +1,5 @@
-﻿using Library.Core.Entities;
+﻿using Library.Api.Response;
+using Library.Core.Entities;
 using Library.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -40,15 +41,17 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> putAuthor(int id, Authors author)
         {
             author.Id = id;
-            await _authorsRepository.UpdateAuthor(author);
-            return Ok(author);
+            var result = await _authorsRepository.UpdateAuthor(author);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
             var result = await _authorsRepository.DeleteAuthor(id);
-            return Ok(result);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Library.Core.DTOs;
+﻿using Library.Api.Response;
+using Library.Core.DTOs;
 using Library.Core.Entities;
 using Library.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -57,14 +58,16 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> PutEditorial(int id,Editorials editorial)
         {
             editorial.Id = id;
-            await _editorialRepository.UpdateEditorial(editorial);
-            return Ok(editorial);
+            var result = await _editorialRepository.UpdateEditorial(editorial);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEditorial(int id)
         {
             var result = await _editorialRepository.DeleteEditorial(id);
-            return Ok(result);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
     }
 }

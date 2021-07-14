@@ -1,4 +1,5 @@
-﻿using Library.Core.Entities;
+﻿using Library.Api.Response;
+using Library.Core.Entities;
 using Library.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -40,15 +41,17 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> putBook(int id, Books book)
         {
             book.Isbn = id;
-            await _booksRepository.updateBook(book);
-            return Ok(book);
+            var result = await _booksRepository.updateBook(book);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteBook(int id)
         {
             var result = await _booksRepository.deleteBook(id);
-            return Ok(result);
+            var response = new APIResponse<bool>(result);
+            return Ok(response);
         }
     }
 }
