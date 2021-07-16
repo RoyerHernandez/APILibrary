@@ -1,4 +1,5 @@
 using Library.Core.Interfaces;
+using Library.Core.Services;
 using Library.Infrastructure.Data;
 using Library.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -34,8 +35,11 @@ namespace Library.Api
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Library")));
 
             //Inyección de Dependencias
+            services.AddTransient<IBookServices, BookServices>();
             services.AddTransient<IBooksRepository, BookRepository>();
+            services.AddTransient<IAuthorServices, AuthorServices>();
             services.AddTransient<IAuthorsRepository, AuthorRepository>();
+            services.AddTransient<IEditorialServices, EditorialServices>();
             services.AddTransient<IEditorialsRepository, EditorialRepository>();
         }
 

@@ -12,15 +12,15 @@ namespace Library.Api.Controllers
     [ApiController]
     public class EditorialsController : ControllerBase
     {
-        private IEditorialsRepository _editorialRepository;
-        public EditorialsController(IEditorialsRepository editorialRepository)
+        private IEditorialServices _editorialServices;
+        public EditorialsController(IEditorialServices editorialServices)
         {
-            _editorialRepository = editorialRepository;
+            _editorialServices = editorialServices;
         }
         [HttpGet]
         public async Task<IActionResult> GetEditorials()
         {
-            var editorials = await _editorialRepository.GetEditorials();
+            var editorials = await _editorialServices.GetEditorials();
             var editorialsDto = editorials.Select(x => new EditorialDto
             {
                 Id = x.Id,
@@ -33,7 +33,7 @@ namespace Library.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEditorial(int id)
         {
-            var editorial = await _editorialRepository.GetEditorial(id);
+            var editorial = await _editorialServices.GetEditorial(id);
             var editorialDto = new EditorialDto
             {
                 Id = editorial.Id,
@@ -51,21 +51,21 @@ namespace Library.Api.Controllers
                 EditorialName = editorialDto.EditorialName,
                 Headquarters = editorialDto.Headquarters
             };
-            await _editorialRepository.InsertEditorial(editorial);
+            await _editorialServices.InsertEditorial(editorial);
             return Ok(editorial);
         }
         [HttpPut]
         public async Task<IActionResult> PutEditorial(int id,Editorials editorial)
         {
             editorial.Id = id;
-            var result = await _editorialRepository.UpdateEditorial(editorial);
+            var result = await _editorialServices.UpdateEditorial(editorial);
             var response = new APIResponse<bool>(result);
             return Ok(response);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEditorial(int id)
         {
-            var result = await _editorialRepository.DeleteEditorial(id);
+            var result = await _editorialServices.DeleteEditorial(id);
             var response = new APIResponse<bool>(result);
             return Ok(response);
         }

@@ -1,6 +1,7 @@
 ﻿using Library.Api.Response;
 using Library.Core.Entities;
 using Library.Core.Interfaces;
+using Library.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -10,30 +11,30 @@ namespace Library.Api.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private IBooksRepository _booksRepository;
-        public BooksController(IBooksRepository booksRepository)
+        private IBookServices _bookService;
+        public BooksController(IBookServices bookService)
         {
-            _booksRepository = booksRepository;
+            _bookService = bookService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetBooks()
         {
-            var books = await _booksRepository.GetBooks();
+            var books = await _bookService.GetBooks();
             return Ok(books);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBook(int id)
         {
-            var book = await _booksRepository.GetBook(id);
+            var book = await _bookService.GetBook(id);
             return Ok(book);
         }
 
         [HttpPost]
         public async Task<IActionResult> InsertBook(Books book)
         {
-            await _booksRepository.InsertBook(book);
+            await _bookService.InsertBook(book);
             return Ok(book);
         }
 
@@ -41,7 +42,7 @@ namespace Library.Api.Controllers
         public async Task<IActionResult> putBook(int id, Books book)
         {
             book.Isbn = id;
-            var result = await _booksRepository.updateBook(book);
+            var result = await _bookService.updateBook(book);
             var response = new APIResponse<bool>(result);
             return Ok(response);
         }
@@ -49,7 +50,7 @@ namespace Library.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> deleteBook(int id)
         {
-            var result = await _booksRepository.deleteBook(id);
+            var result = await _bookService.deleteBook(id);
             var response = new APIResponse<bool>(result);
             return Ok(response);
         }
