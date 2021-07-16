@@ -10,5 +10,6 @@ Fluent API in EF Core
 HTTP Basics & REST
 DTOs & Automapper
 Crud Operations with EF Core
+Business Logic and Repository Pattern
  
  
