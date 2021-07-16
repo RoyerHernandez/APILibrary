@@ -1,5 +1,6 @@
 ﻿using Library.Core.Entities;
 using Library.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -8,10 +9,12 @@ namespace Library.Core.Services
     public class BookServices : IBookServices
     {
         private readonly IBooksRepository _bookRepository;
+        private readonly IEditorialsRepository _editorialsRepository;
 
-        public BookServices(IBooksRepository bookRepository)
+        public BookServices(IBooksRepository bookRepository, IEditorialsRepository editorialsRepository)
         {
             _bookRepository = bookRepository;
+            _editorialsRepository = editorialsRepository;
         }
 
         public async Task<Books> GetBook(int id)
@@ -24,6 +27,12 @@ namespace Library.Core.Services
         }
         public async Task InsertBook(Books book)
         {
+            var editorial = await _editorialsRepository.GetEditorial(book.EditorialId);
+
+            if (editorial == null)
+            {
+                throw new Exception("The editorial doesn't exist");
+            }
             await _bookRepository.InsertBook(book);
         }
         public async Task<bool> updateBook(Books book)
