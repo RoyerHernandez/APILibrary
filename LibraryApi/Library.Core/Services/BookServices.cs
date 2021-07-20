@@ -33,6 +33,12 @@ namespace Library.Core.Services
             {
                 throw new Exception("The editorial doesn't exist");
             }
+
+            if (book.Pages.Length < 2)
+            {
+                throw new Exception("The number page of th book is not allowed");
+            }
+
             await _bookRepository.InsertBook(book);
         }
         public async Task<bool> updateBook(Books book)
