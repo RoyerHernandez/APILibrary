@@ -8,12 +8,12 @@ namespace Library.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Books> builder)
         {
-            builder.HasKey(e => e.Isbn)
+            builder.HasKey(e => e.Id)
                    .HasName("PK__BOOKS__447D36EBF8E97067");
 
             builder.ToTable("BOOKS");
 
-            builder.Property(e => e.Isbn).HasColumnName("ISBN");
+            builder.Property(e => e.Id).HasColumnName("ISBN");
 
             builder.Property(e => e.EditorialId).HasColumnName("editorialId");
 

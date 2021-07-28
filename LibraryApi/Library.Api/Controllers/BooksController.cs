@@ -41,7 +41,7 @@ namespace Library.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> putBook(int id, Books book)
         {
-            book.Isbn = id;
+            book.Id = id;
             var result = await _bookService.updateBook(book);
             var response = new APIResponse<bool>(result);
             return Ok(response);

@@ -8,10 +8,10 @@ namespace Library.Core.Services
 {
     public class BookServices : IBookServices
     {
-        private readonly IBooksRepository _bookRepository;
-        private readonly IEditorialsRepository _editorialsRepository;
+        private readonly IRepository<Books> _bookRepository;
+        private readonly IRepository<Editorials> _editorialsRepository;
 
-        public BookServices(IBooksRepository bookRepository, IEditorialsRepository editorialsRepository)
+        public BookServices(IRepository<Books> bookRepository, IRepository<Editorials> editorialsRepository)
         {
             _bookRepository = bookRepository;
             _editorialsRepository = editorialsRepository;
@@ -19,15 +19,15 @@ namespace Library.Core.Services
 
         public async Task<Books> GetBook(int id)
         {
-            return await _bookRepository.GetBook(id);
+            return await _bookRepository.GetById(id);
         }
         public async Task<IEnumerable<Books>> GetBooks()
         {
-            return await _bookRepository.GetBooks();
+            return await _bookRepository.GetAll();
         }
         public async Task InsertBook(Books book)
         {
-            var editorial = await _editorialsRepository.GetEditorial(book.EditorialId);
+            var editorial = await _editorialsRepository.GetById(book.EditorialId);
 
             if (editorial == null)
             {
@@ -39,15 +39,17 @@ namespace Library.Core.Services
                 throw new Exception("The number page of th book is not allowed");
             }
 
-            await _bookRepository.InsertBook(book);
+            await _bookRepository.Add(book);
         }
         public async Task<bool> updateBook(Books book)
         {
-            return await _bookRepository.updateBook(book);
+            await _bookRepository.Update(book);
+            return true;
         }
         public async Task<bool> deleteBook(int id)
         {
-            return await _bookRepository.deleteBook(id);
+            await _bookRepository.Delete(id);
+            return true;
         }
     }
 }

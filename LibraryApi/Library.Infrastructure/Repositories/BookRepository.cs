@@ -22,7 +22,7 @@ namespace Library.Infrastructure.Repositories
         }
         public async Task<Books> GetBook(int id)
         {
-            var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Isbn == id);
+            var book = await _dbContext.Books.FirstOrDefaultAsync(x => x.Id == id);
             return book;
         }
         public async Task InsertBook(Books book)
@@ -45,7 +45,7 @@ namespace Library.Infrastructure.Repositories
 
         public async Task<bool> updateBook(Books book)
         {
-            var currentBook = await GetBook(book.Isbn);
+            var currentBook = await GetBook(book.Id);
             currentBook.Title = book.Title;
             currentBook.Sinopsis = book.Sinopsis;
             currentBook.Pages = book.Pages;

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Configurations\EditorialsConfiguration.cs~RF4fb5e3d6.TMP" />
     <None Remove="Repositories\EditorialRepository.cs~RF6b549f.TMP" />
   </ItemGroup>
 

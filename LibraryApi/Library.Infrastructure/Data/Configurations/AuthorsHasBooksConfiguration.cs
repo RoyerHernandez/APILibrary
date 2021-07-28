@@ -8,12 +8,12 @@ namespace Library.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<AuthorsHasBooks> builder)
         {
-            builder.HasKey(e => e.AuthoresId)
+            builder.HasKey(e => e.Id)
                     .HasName("PK__AUTHORS___548E8C9671869641");
 
             builder.ToTable("AUTHORS_HAS_BOOKS");
 
-            builder.Property(e => e.AuthoresId)
+            builder.Property(e => e.Id)
                 .HasColumnName("authoresID")
                 .ValueGeneratedNever();
 
@@ -21,7 +21,7 @@ namespace Library.Infrastructure.Data.Configurations
 
             builder.HasOne(d => d.Authores)
                 .WithOne(p => p.AuthorsHasBooks)
-                .HasForeignKey<AuthorsHasBooks>(d => d.AuthoresId)
+                .HasForeignKey<AuthorsHasBooks>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__AUTHORS_H__autho__3E52440B");
 

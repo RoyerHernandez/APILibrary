@@ -36,11 +36,14 @@ namespace Library.Api
 
             //Inyección de Dependencias
             services.AddTransient<IBookServices, BookServices>();
-            services.AddTransient<IBooksRepository, BookRepository>();
-            services.AddTransient<IAuthorServices, AuthorServices>();
-            services.AddTransient<IAuthorsRepository, AuthorRepository>();
-            services.AddTransient<IEditorialServices, EditorialServices>();
-            services.AddTransient<IEditorialsRepository, EditorialRepository>();
+            //services.AddTransient<IBooksRepository, BookRepository>();
+            //services.AddTransient<IAuthorServices, AuthorServices>();
+            //services.AddTransient<IAuthorsRepository, AuthorRepository>();
+            //services.AddTransient<IEditorialServices, EditorialServices>();
+            //services.AddTransient<IEditorialsRepository, EditorialRepository>();
+
+            //Implementación Generica
+            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
