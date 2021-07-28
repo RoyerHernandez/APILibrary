@@ -8,26 +8,24 @@ namespace Library.Core.Services
 {
     public class BookServices : IBookServices
     {
-        private readonly IRepository<Books> _bookRepository;
-        private readonly IRepository<Editorials> _editorialsRepository;
+        private readonly IUnitOfWork _unitOfWork;        
 
-        public BookServices(IRepository<Books> bookRepository, IRepository<Editorials> editorialsRepository)
+        public BookServices(IUnitOfWork unitOfWork)
         {
-            _bookRepository = bookRepository;
-            _editorialsRepository = editorialsRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Books> GetBook(int id)
         {
-            return await _bookRepository.GetById(id);
+            return await _unitOfWork.BooksRepository.GetById(id);
         }
         public async Task<IEnumerable<Books>> GetBooks()
         {
-            return await _bookRepository.GetAll();
+            return await _unitOfWork.BooksRepository.GetAll();
         }
         public async Task InsertBook(Books book)
         {
-            var editorial = await _editorialsRepository.GetById(book.EditorialId);
+            var editorial = await _unitOfWork.EditorialsRepository.GetById(book.EditorialId);
 
             if (editorial == null)
             {
@@ -39,16 +37,16 @@ namespace Library.Core.Services
                 throw new Exception("The number page of th book is not allowed");
             }
 
-            await _bookRepository.Add(book);
+            await _unitOfWork.BooksRepository.Add(book);
         }
         public async Task<bool> updateBook(Books book)
         {
-            await _bookRepository.Update(book);
+            await _unitOfWork.BooksRepository.Update(book);
             return true;
         }
         public async Task<bool> deleteBook(int id)
         {
-            await _bookRepository.Delete(id);
+            await _unitOfWork.BooksRepository.Delete(id);
             return true;
         }
     }
