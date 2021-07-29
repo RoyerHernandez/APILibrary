@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library.Api.Controllers
 {
+    /// <summary>
+    /// Obtiene todos los Libros disponibles
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase

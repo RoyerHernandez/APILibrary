@@ -9,31 +9,33 @@ namespace Library.Core.Services
 {
     public class EditorialServices : IEditorialServices
     {
-        private readonly IEditorialsRepository _editorialRepository;
-        public EditorialServices(IEditorialsRepository editorialRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public EditorialServices(IUnitOfWork unitOfWork)
         {
-            _editorialRepository = editorialRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Editorials> GetEditorial(int id)
         {
-            return await _editorialRepository.GetEditorial(id);
+            return await _unitOfWork.EditorialsRepository.GetById(id);
         }
         public async Task<IEnumerable<Editorials>> GetEditorials()
         {
-            return await _editorialRepository.GetEditorials();
+            return await _unitOfWork.EditorialsRepository.GetAll();
         }
         public async Task InsertEditorial(Editorials editorial)
         {
-            await _editorialRepository.InsertEditorial(editorial);
+            await _unitOfWork.EditorialsRepository.Add(editorial);
         }
         public async Task<bool> UpdateEditorial(Editorials editorial)
         {
-            return await _editorialRepository.UpdateEditorial(editorial);
+            await _unitOfWork.EditorialsRepository.Update(editorial);
+            return true;
         }
         public async Task<bool> DeleteEditorial(int id)
         {
-            return await _editorialRepository.DeleteEditorial(id);
+            await _unitOfWork.EditorialsRepository.Delete(id);
+            return true;
         }
     }
 }

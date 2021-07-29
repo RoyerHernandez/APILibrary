@@ -9,31 +9,33 @@ namespace Library.Core.Services
 {
     public class AuthorServices : IAuthorServices
     {
-        private readonly IAuthorsRepository _authorsRepository;
-        public AuthorServices(IAuthorsRepository authorsRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public AuthorServices(IUnitOfWork unitOfWork)
         {
-            _authorsRepository = authorsRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Authors> GetAuthor(int id)
         {
-            return await _authorsRepository.GetAuthor(id);
+            return await _unitOfWork.AuthorsRepository.GetById(id);
         }
         public async Task<IEnumerable<Authors>> GetAuthors()
         {
-            return await _authorsRepository.GetAuthors();
+            return await _unitOfWork.AuthorsRepository.GetAll();
         }
         public async Task InsertAuthor(Authors author)
         {
-            await _authorsRepository.InsertAuthor(author);
+            await _unitOfWork.AuthorsRepository.Add(author);
         }
         public async Task<bool> UpdateAuthor(Authors author)
         {
-            return await _authorsRepository.UpdateAuthor(author);
+            await _unitOfWork.AuthorsRepository.Update(author);
+            return true;
         }
         public async Task<bool> DeleteAuthor(int Id)
         {
-            return await _authorsRepository.DeleteAuthor(Id);
+            await _unitOfWork.AuthorsRepository.Delete(Id);
+            return true;
         }
     }
 }
